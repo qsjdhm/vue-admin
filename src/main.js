@@ -6,8 +6,14 @@ import router from './router'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
+import './assets/icons' // icon
+// // 注册icon组件
+// import SvgIcon from '@/components/SvgIcon';
+// Vue.Component('svg-icon', SvgIcon);
+
 Vue.config.productionTip = false
 Vue.use(ElementUI, { size: 'small' });
+
 
 
 /* eslint-disable no-new */
