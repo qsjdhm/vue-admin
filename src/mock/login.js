@@ -19,11 +19,10 @@ const userMap = {
 
 // 拦截接口
 // 当跟后台联调真实数据时，直接注释掉对应接口的拦截就可以了
-// Mock.mock(/\/auth\/login/, 'post', config => {
-//     console.info(config);
-//     const { username } = JSON.parse(config.body)
-//     return userMap[username]
-// });
+Mock.mock(/\/auth\/login/, 'post', config => {
+    const { username } = JSON.parse(config.body)
+    return userMap[username]
+});
 Mock.mock(/\/login\/logout/, 'post', 'ok');
 Mock.mock(/\/user\/info\.*/, 'get', 'asdkbajshbd');
 
