@@ -13,6 +13,7 @@ import './assets/icons' // icon
 // 开发环境下使用mock，其他环境使用真实数据
 if (process.env.NODE_ENV === 'development') { require('./mock') }  // mock
 
+import '@/styles/index.scss' // global css
 
 Vue.config.productionTip = false
 Vue.use(ElementUI, { size: 'small' });

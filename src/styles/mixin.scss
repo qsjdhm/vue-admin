@@ -1,0 +1,13 @@
+/**
+ * 公用样式
+ * 例：@include clearfix;  或  class="clearfix"
+ */
+// 清除浮动
+@mixin clearfix {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+

@@ -18,6 +18,7 @@
             handleLogin () {
                 this.$store.dispatch('Login/loginByUsername', {username: 'root', password: '123456'}).then((data) => {
                     console.info(data);
+                    this.$router.push({ path: '/dashboard' })
                 })
             },
             handleMachine () {
