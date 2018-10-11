@@ -4,6 +4,7 @@ import Vue from 'vue'
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import '@/styles/index.scss' // global css
 
 import App from './App'
 import router from './router'
@@ -13,7 +14,6 @@ import './assets/icons' // icon
 // 开发环境下使用mock，其他环境使用真实数据
 if (process.env.NODE_ENV === 'development') { require('./mock') }  // mock
 
-import '@/styles/index.scss' // global css
 
 Vue.config.productionTip = false
 Vue.use(ElementUI, { size: 'small' });

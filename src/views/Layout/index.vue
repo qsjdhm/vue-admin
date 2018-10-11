@@ -29,7 +29,7 @@
 
 <style rel="stylesheet/scss" lang="scss" scoped>
     @import "@/styles/mixin.scss";
-
+    
     .layout-page {
         @include clearfix;
         position: relative;
