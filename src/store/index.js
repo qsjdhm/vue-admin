@@ -6,10 +6,11 @@ import Vuex from 'vuex';
 import middlewares from './middlewares';
 import createLogger from 'vuex/dist/logger';
 
-import * as state from './state';
-import * as getters from './getters';
-import * as actions from './actions';
-import * as mutations from './mutations';
+import state from './state'
+import getters from './getters'
+import mutations from './mutations'
+import actions from './actions'
+
 
 /**
  * 引入业务页面模块
@@ -28,15 +29,14 @@ Vue.config.debug = debug;
 export default new Vuex.Store({
     state,
     getters,
-    actions,
     mutations,
+    actions,
     modules: {
         Login,
         Machine
     },
     strict: debug,
-    middlewares: middlewares
-    // ,
-    // plugins: [createLogger()]
+    middlewares: middlewares,
+    plugins: [createLogger()]
 });
 

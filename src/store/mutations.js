@@ -1,3 +1,9 @@
 /**
- * Created by zhangyan on 17/2/20.
+ * Created by qsjdhm@163.com on 18/10/12.
  */
+
+export default {
+    TOGGLE_SIDEBAR: (state, value) => {
+        state.sidebarClosed = value;
+    }
+};

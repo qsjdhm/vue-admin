@@ -1,14 +1,36 @@
 <template>
-    <div>AppMain</div>
+    <div class="app-main-pack">
+        <router-view/>
+    </div>
 </template>
 
 <script>
     export default {
         name: 'AppMain',
+        data () {
+            return {
+            }
+        },
         methods: {
         }
     }
 </script>
 
-<style lang="scss">
+
+<style rel="stylesheet/scss" lang="scss" scoped>
+    @import "@/styles/mixin.scss";
+
+    .app-main-pack {
+        @include rdc-box-sizing;
+        position: absolute;
+        top: 118px;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        padding: 15px;
+        overflow-x: hidden;
+        -webkit-box-shadow: 0 1px 4px rgba(0,21,41,.08);
+        box-shadow: 0 1px 4px rgba(0,21,41,.08);
+    }
 </style>
+
