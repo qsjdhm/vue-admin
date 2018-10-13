@@ -16,6 +16,7 @@ import actions from './actions'
  * 引入业务页面模块
  */
 import Login from './modules/Login';
+import Permission from './modules/Permission';
 import Machine from './modules/Machine';
 
 /**
@@ -33,6 +34,7 @@ export default new Vuex.Store({
     actions,
     modules: {
         Login,
+        Permission,
         Machine
     },
     strict: debug,

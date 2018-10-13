@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="tools-pack">
-            <div class="warning-pack">
+            <div class="warning-pack zoom">
                 <svg-icon icon-class="warning"></svg-icon>
             </div>
             <div class="question-pack">
@@ -33,7 +33,7 @@
             <div class="avatar-pack">
                 <el-dropdown>
                     <span class="el-dropdown-link">
-                        <img :src="require(`../../../assets/images/layout/avatar.png`)">
+                        <img :src="require(`../../../assets/images/Layout/avatar.png`)">
                     </span>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item>个人中心</el-dropdown-item>

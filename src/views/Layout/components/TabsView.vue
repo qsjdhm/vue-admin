@@ -23,11 +23,19 @@
                     name: '1',
                     content: 'Tab 1 content'
                 }, {
-                    title: 'Tab 2',
+                    title: 'Tab 1',
                     name: '2',
+                    content: 'Tab 1 content'
+                }, {
+                    title: 'Tab 2',
+                    name: '3',
+                    content: 'Tab 2 content'
+                }, {
+                    title: 'Tab 2',
+                    name: '4',
                     content: 'Tab 2 content'
                 }],
-                tabIndex: 2
+                tabIndex: 3
             }
         },
         methods: {
@@ -56,7 +64,7 @@
                 margin: 0 10px!important;
             }
             .el-tabs__item {
-                background: #f7f7f7;
+                background: #fff;
                 border: 1px solid #dcdcdc!important;
                 margin-right: 10px;
 
@@ -77,8 +85,10 @@
 
             .is-active {
                 color: #fff;
-                background: #409EFF;
-                border: 0px solid #fff!important;
+                background: #32a8fe ;
+                border: 1px solid #fff!important;
+                height: 42px;
+                line-height: 42px;
             }
         }
 

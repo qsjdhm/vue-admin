@@ -39,6 +39,9 @@
             compandingChange (left) {
                 this.left = left;
             }
+        },
+        mounted () {
+            console.info(3333);
         }
     }
 </script>

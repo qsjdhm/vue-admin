@@ -1,5 +1,3 @@
-import * as types from './types';
-import {Message, MessageBox} from 'element-ui';
 
 import API from '@/api/login'
 
