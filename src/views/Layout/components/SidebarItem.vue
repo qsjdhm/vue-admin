@@ -79,20 +79,14 @@
             },
             resolvePath (routePath) {
                 if (this.isExternalLink(routePath)) {
-                    console.info(111);
-                    console.info(routePath);
                     return routePath
                 }
                 let p = path.resolve(this.basePath, routePath);
-                console.info(222);
-                console.info(p);
                 return p
             },
             isExternalLink (routePath) {
                 return validateURL(routePath)
             }
-        },
-        created () {
         }
     }
 </script>

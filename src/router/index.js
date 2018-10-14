@@ -59,7 +59,11 @@ export const constantRouterMap = [
                 meta: {title: 'Dashboard', icon: 'dashboard'}
             }
         ]
-    },
+    }
+]
+
+// 业务级路由（后期可能在界面中动态配置）
+export const asyncRouterMap = [
     {
         path: '/maintain',
         component: Layout,
@@ -80,30 +84,6 @@ export const constantRouterMap = [
             }
         ]
     }
-]
-
-// 业务级路由（后期可能在界面中动态配置）
-export const asyncRouterMap = [
-    // {
-    //     path: '/maintain',
-    //     component: Layout,
-    //     redirect: '/maintain/list',
-    //     children: [
-    //         {
-    //             path: 'list',
-    //             component: MaintainList,
-    //             name: 'MaintainList',
-    //             meta: {title: 'MaintainList', icon: 'dashboard'}
-    //         },
-    //         {
-    //             path: 'detail/:id(\\d+)',
-    //             component: MaintainDetail,
-    //             name: 'MaintainDetail',
-    //             meta: { title: 'MaintainDetail', icon: 'dashboard' },
-    //             hidden: true  // 详情页不在菜单显示
-    //         }
-    //     ]
-    // }
 ]
 
 export default new Router({

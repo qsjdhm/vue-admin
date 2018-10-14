@@ -27,7 +27,7 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex'
+    import { mapState, mapGetters } from 'vuex'
 
     import SidebarItem from './SidebarItem'
 
@@ -36,12 +36,14 @@
             SidebarItem
         },
         name: 'Sidebar',
+        data () {
+            return {
+            }
+        },
         computed: {
             ...mapState({
-                sidebarClosed: state => state.sidebarClosed
-            }),
-            ...mapState('Permission', {
-                routers: state => state.routers
+                sidebarClosed: state => state.sidebarClosed,
+                routers: state => state.Permission.routers
             })
         },
         methods: {
@@ -51,11 +53,6 @@
             handleClose (key, keyPath) {
                 console.log(key, keyPath);
             }
-        },
-        created () {
-            console.info('------------------------');
-            console.info(this.routers);
-            console.info(this.$route.path);
         }
     }
 </script>

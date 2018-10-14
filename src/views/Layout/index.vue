@@ -35,13 +35,8 @@
             })
         },
         methods: {
-            // 缩展发生改变
-            compandingChange (left) {
-                this.left = left;
-            }
         },
         mounted () {
-            console.info(3333);
         }
     }
 </script>
