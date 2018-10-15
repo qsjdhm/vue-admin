@@ -46,7 +46,6 @@ export const constantRouterMap = [
         component: Login,
         hidden: true
     },
-    nestedRouter,
     {
         path: '/dashboard',
         component: Layout,
@@ -54,7 +53,7 @@ export const constantRouterMap = [
         children: [
             {
                 path: 'index',
-                component: Dashboard,
+                component: () => import('@/views/Dashboard'),
                 name: 'Dashboard',
                 meta: {title: 'Dashboard', icon: 'dashboard'}
             }
@@ -71,22 +70,51 @@ export const asyncRouterMap = [
         children: [
             {
                 path: 'list',
-                component: MaintainList,
+                component: () => import('@/views/Maintain/list'),
                 name: 'MaintainList',
                 meta: {title: 'MaintainList', icon: 'dashboard'}
             },
             {
                 path: 'detail/:id(\\d+)',
-                component: MaintainDetail,
+                component: () => import('@/views/Maintain/detail'),
                 name: 'MaintainDetail',
                 meta: { title: 'MaintainDetail', icon: 'dashboard' },
                 hidden: true  // 详情页不在菜单显示
             }
         ]
-    }
+    },
+    {
+        path: '/cutter',
+        component: Layout,
+        redirect: '/cutter/list',
+        meta: {title: 'Cutter', icon: 'dashboard'},
+        children: [
+            {
+                path: 'new',
+                component: () => import('@/views/Cutter/new'),
+                name: 'CutterNew',
+                meta: {title: 'CutterNew', icon: 'dashboard'}
+            },
+            {
+                path: 'list',
+                component: () => import('@/views/Cutter/list'),
+                name: 'CutterList',
+                meta: {title: 'CutterList', icon: 'dashboard'}
+            },
+            {
+                path: 'detail/:id(\\d+)',
+                component: () => import('@/views/Cutter/detail'),
+                name: 'CutterDetail',
+                meta: { title: 'CutterDetail', icon: 'dashboard' },
+                hidden: true  // 详情页不在菜单显示
+            }
+        ]
+    },
+    nestedRouter
 ]
 
 export default new Router({
     // mode: 'history', // require service support
+    scrollBehavior: () => ({ y: 0 }),
     routes: constantRouterMap
 })

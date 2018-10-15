@@ -49,7 +49,7 @@
         top: 64px;
         left: 0;
         right: 0;
-        height: 54px;
+        height: 40px;
         padding: 0 20px 0 0;
         background: #fff;
         -webkit-box-shadow: 0 1px 4px rgba(0,21,41,.08);
@@ -64,6 +64,8 @@
                 margin: 0 10px!important;
             }
             .el-tabs__item {
+                height: 30px;
+                line-height: 30px;
                 background: #fff;
                 border: 1px solid #dcdcdc!important;
                 margin-right: 10px;
@@ -87,8 +89,8 @@
                 color: #fff;
                 background: #32a8fe ;
                 border: 1px solid #fff!important;
-                height: 42px;
-                line-height: 42px;
+                height: 31px;
+                line-height: 31px;
             }
         }
 

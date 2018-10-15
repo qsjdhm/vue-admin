@@ -1,6 +1,8 @@
 /**
  * 初始化路由权限
  */
+import NProgress from 'nprogress' // progress bar
+import 'nprogress/nprogress.css'// progress bar style
 import { getToken } from '@/utils/auth' // getToken from cookie
 
 import router from './router'
@@ -9,12 +11,16 @@ import store from './store'
 // 免登陆白名单
 const whiteList = ['/']
 
+NProgress.configure({ showSpinner: false })// NProgress Configuration
+
 router.beforeEach((to, from, next) => {
+    NProgress.start() // start progress bar
     // token没有用户信息，代表没有登录过
     if (!getToken()) {
         // 在免登录白名单，直接进入
         if (whiteList.indexOf(to.path) !== -1) {
             next()
+            NProgress.done()
         } else {
             // 否则全部重定向到登录页
             next(`/?redirect=${to.path}`)
@@ -37,5 +43,9 @@ router.beforeEach((to, from, next) => {
             next()
         }
     }
+})
+
+router.afterEach(() => {
+    NProgress.done() // finish progress bar
 })
 

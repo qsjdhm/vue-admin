@@ -1,7 +1,7 @@
 <template>
-    <div class="app-main-pack">
-        <router-view/>
-    </div>
+    <section class="app-main-pack">
+        <router-view :key="key"/>
+    </section>
 </template>
 
 <script>
@@ -9,6 +9,11 @@
         name: 'AppMain',
         data () {
             return {
+            }
+        },
+        computed: {
+            key () {
+                return this.$route.fullPath
             }
         },
         methods: {
@@ -23,7 +28,7 @@
     .app-main-pack {
         @include rdc-box-sizing;
         position: absolute;
-        top: 118px;
+        top: 105px;
         left: 0;
         bottom: 0;
         right: 0;
