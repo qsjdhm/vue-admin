@@ -27,11 +27,11 @@ router.beforeEach((to, from, next) => {
         }
     } else {
         // 如果store中没有路由数据，就初始化路由
-        if (store.state.Permission.routers.length === 0) {
+        if (!store.state.Permission.initFlag) {
             // 初始化菜单路由
             store.dispatch('Permission/initRouters').then(() => {
                 // 动态添加可访问路由表
-                router.addRoutes(_.cloneDeep(store.state.Permission.routers))
+                router.addRoutes(store.state.Permission.routers)
                 // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
                 next({ ...to, replace: true })
             }).catch((error) => {

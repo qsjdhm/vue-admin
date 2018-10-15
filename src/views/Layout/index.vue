@@ -37,6 +37,7 @@
         methods: {
         },
         mounted () {
+            console.info('------------------------');
         }
     }
 </script>

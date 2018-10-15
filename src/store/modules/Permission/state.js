@@ -1,4 +1,6 @@
+import { constantRouterMap } from '@/router'
 
 export default {
-    routers: []
+    initFlag: false,  // 是否初始化菜单的标志
+    routers: constantRouterMap
 };
