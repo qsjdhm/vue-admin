@@ -1,7 +1,7 @@
 <template>
     <div v-if="!item.hidden" class="sidebar-item-pack">
         <!-- 显示一层菜单 -->
-        <template v-if="hasOneShowingChild(item.children, item) && (!onlyOneChild.children || onlyOneChild.noShowingChildren) && !item.alwaysShow">
+        <template v-if="hasOneShowingChild(item.children, item) && (!onlyOneChild.children || onlyOneChild.noShowingChildren)">
             <router-link :to="resolvePath(onlyOneChild.path)">
                 <el-menu-item :index="resolvePath(onlyOneChild.path)">
                     <i class="el-icon-menu"></i><span slot="title">{{onlyOneChild.meta.title}}</span>
@@ -9,13 +9,13 @@
             </router-link>
         </template>
 
-        <!-- 显示分级菜单 -->
+        <!-- 显示多级菜单 -->
         <el-submenu v-else ref="submenu" :index="resolvePath(item.path)">
             <template slot="title">
                 <i class="el-icon-menu"></i><span slot="title">{{item.meta.title}}</span>
             </template>
 
-            <!-- 一个递归，如果children还有多级子children  那就还是调用SidebarItem组件进行渲染 -->
+            <!-- 一个递归，如果children还有多级子 -->
             <template v-for="child in item.children" v-if="!child.hidden">
                 <sidebar-item
                     v-if="child.children && child.children.length > 0"
@@ -93,8 +93,19 @@
     }
 </script>
 
-<style rel="stylesheet/scss" lang="scss" scoped>
+<style rel="stylesheet/scss" lang="scss">
     @import "@/styles/mixin.scss";
+    /* 因为把item独立为一个组件，所以需要在原来的样式上多加一层选择器‘>.sidebar-item-pack’ */
+    .el-menu--collapse>.sidebar-item-pack>.el-menu-item span, .el-menu--collapse>.sidebar-item-pack>.el-submenu>.el-submenu__title span {
+        height: 0;
+        width: 0;
+        overflow: hidden;
+        visibility: hidden;
+        display: inline-block;
+    }
+    .el-menu--collapse>.sidebar-item-pack>.el-menu-item .el-submenu__icon-arrow, .el-menu--collapse>.sidebar-item-pack>.el-submenu>.el-submenu__title .el-submenu__icon-arrow {
+        display: none;
+    }
     .sidebar-item-pack {
         .el-menu-item {
             height: 50px;
