@@ -131,8 +131,8 @@
             .avatar-pack {
                 font-size: 16px;
                 img {
-                    width: 48px;
-                    height: 48px;
+                    width: 38px;
+                    height: 38px;
                 }
             }
             .language-pack {
