@@ -1,7 +1,7 @@
 <template>
     <div v-if="!item.hidden" class="sidebar-item-pack">
         <!-- 显示一层菜单 -->
-        <template v-if="hasOneShowingChild(item.children, item) && (!onlyOneChild.children || onlyOneChild.noShowingChildren)">
+        <template v-if="hasOneShowingChild(item.children, item) && (!onlyOneChild.children || onlyOneChild.noShowingChildren) && !item.alwaysShow">
             <router-link :to="resolvePath(onlyOneChild.path)">
                 <el-menu-item :index="resolvePath(onlyOneChild.path)">
                     <i class="el-icon-menu"></i><span slot="title">{{onlyOneChild.meta.title}}</span>
@@ -9,14 +9,16 @@
             </router-link>
         </template>
 
+        <!-- 显示分级菜单 -->
         <el-submenu v-else ref="submenu" :index="resolvePath(item.path)">
             <template slot="title">
                 <i class="el-icon-menu"></i><span slot="title">{{item.meta.title}}</span>
             </template>
 
+            <!-- 一个递归，如果children还有多级子children  那就还是调用SidebarItem组件进行渲染 -->
             <template v-for="child in item.children" v-if="!child.hidden">
                 <sidebar-item
-                    v-if="child.children&&child.children.length>0"
+                    v-if="child.children && child.children.length > 0"
                     :is-nest="true"
                     :item="child"
                     :key="child.path"

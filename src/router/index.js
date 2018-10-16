@@ -67,6 +67,8 @@ export const asyncRouterMap = [
         path: '/maintain',
         component: Layout,
         redirect: '/maintain/list',
+        meta: {title: 'Maintain', icon: 'dashboard'},
+        // alwaysShow: true,  // 是否要一直显示根菜单
         children: [
             {
                 path: 'list',
