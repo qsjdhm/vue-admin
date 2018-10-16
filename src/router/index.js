@@ -20,20 +20,6 @@ import Error404 from '@/views/ErrorPage/404'
 // 嵌套路由
 import nestedRouter from './modules/nested'
 
-// 业务级菜单 -- 根据不同业务需要显示在菜单
-// 仪表盘
-import Dashboard from '@/views/Dashboard'
-// 设备维修（直接显示一个菜单）
-import MaintainList from '@/views/Maintain/list'
-import MaintainDetail from '@/views/Maintain/detail'
-// 刀具管理（菜单显示new、list，detail在list中点击出现）
-import CutterNew from '@/views/Cutter/new'
-import CutterList from '@/views/Cutter/list'
-import CutterDetail from '@/views/Cutter/detail'
-// 设备分析
-import AnalyzeUse from '@/views/Analyze/use'
-import AnalyzeData from '@/views/Analyze/data'
-import AnalyzeDataDetail from '@/views/Analyze/dataDetail'
 
 
 Vue.use(Router)
@@ -109,6 +95,33 @@ export const asyncRouterMap = [
                 name: 'CutterDetail',
                 meta: { title: 'CutterDetail', icon: 'dashboard' },
                 hidden: true  // 详情页不在菜单显示
+            }
+        ]
+    },
+    {
+        path: '/analyze',
+        component: Layout,
+        redirect: '/analyze/use',
+        meta: {title: 'Analyze', icon: 'dashboard'},
+        children: [
+            {
+                path: 'use',
+                component: () => import('@/views/Analyze/use'),
+                name: 'AnalyzeUse',
+                meta: {title: 'AnalyzeUse', icon: 'dashboard'}
+            },
+            {
+                path: 'data',
+                component: () => import('@/views/Analyze/dataList'),
+                name: 'AnalyzeData',
+                meta: {title: 'AnalyzeData', icon: 'dashboard'}
+            },
+            {
+                path: 'dataDetail/:id(\\d+)',
+                component: () => import('@/views/Analyze/dataDetail'),
+                name: 'AnalyzeDataDetail',
+                meta: {title: 'AnalyzeDataDetail', icon: 'dashboard'},
+                hidden: true
             }
         ]
     },

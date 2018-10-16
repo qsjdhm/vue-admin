@@ -4,11 +4,11 @@
 
 <script>
     export default {
-        name: 'AnalyzeData',
+        name: 'AnalyzeDataDetail',
         methods: {
         }
     }
 </script>
 
-<style lang="scss">
+<style rel="stylesheet/scss" lang="scss" scoped>
 </style>

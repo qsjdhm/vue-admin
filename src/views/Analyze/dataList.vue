@@ -1,10 +1,10 @@
 <template>
-    <div>AnalyzeUse</div>
+    <div>AnalyzeDataList</div>
 </template>
 
 <script>
     export default {
-        name: 'AnalyzeUse',
+        name: 'AnalyzeDataList',
         methods: {
         }
     }
