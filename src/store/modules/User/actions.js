@@ -12,6 +12,8 @@ export default {
                 commit('SET_TOKEN', '不拽注定被甩~')
                 setToken('不拽注定被甩~')
                 resolve(response)
+            }).catch((e) => {
+                reject(e)
             })
         });
     }

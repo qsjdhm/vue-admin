@@ -1,10 +1,14 @@
 <template>
     <section class="app-main-pack">
-        <router-view :key="key"/>
+        <keep-alive :include="cachedView">
+            <router-view :key="key"/>
+        </keep-alive>
     </section>
 </template>
 
 <script>
+
+    import { mapState } from 'vuex'
     export default {
         name: 'AppMain',
         data () {
@@ -12,8 +16,11 @@
             }
         },
         computed: {
+            ...mapState('TabsView', {
+                cachedView: state => state.cachedView
+            }),
             key () {
-                return this.$route.fullPath
+                return this.$route.path
             }
         },
         methods: {

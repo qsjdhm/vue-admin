@@ -66,7 +66,7 @@ export const asyncRouterMap = [
                 path: 'detail/:id(\\d+)',
                 component: () => import('@/views/Maintain/detail'),
                 name: 'MaintainDetail',
-                meta: { title: 'MaintainDetail', icon: 'dashboard' },
+                meta: { title: 'MaintainDetail', icon: 'dashboard', noCache: true },
                 hidden: true  // 详情页不在菜单显示
             }
         ]

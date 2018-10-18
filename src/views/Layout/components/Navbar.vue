@@ -31,15 +31,15 @@
                 </el-tooltip>
             </div>
             <div class="avatar-pack">
-                <el-dropdown>
+                <el-dropdown @command="dropdownCommand">
                     <span class="el-dropdown-link">
                         <img :src="require(`../../../assets/images/Layout/avatar.png`)">
                     </span>
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item>个人中心</el-dropdown-item>
-                        <el-dropdown-item>待办任务</el-dropdown-item>
-                        <el-dropdown-item>触发报错</el-dropdown-item>
-                        <el-dropdown-item divided>退出登录</el-dropdown-item>
+                        <el-dropdown-item command="center">个人中心</el-dropdown-item>
+                        <el-dropdown-item command="backlog">待办任务</el-dropdown-item>
+                        <el-dropdown-item command="error">触发报错</el-dropdown-item>
+                        <el-dropdown-item command="logout" divided>退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
             </div>
@@ -59,6 +59,8 @@
 </template>
 
 <script>
+    import { removeToken } from '@/utils/auth' // getToken from cookie
+
     import { mapState } from 'vuex'
 
     export default {
@@ -74,8 +76,23 @@
         },
         methods: {
             toggleSideBar () {
-                console.info(this.sidebarClosed);
                 this.$store.dispatch('toggleSideBar', !this.sidebarClosed)
+            },
+            // 下拉项点击事件
+            dropdownCommand (command) {
+                if (command === 'password') {
+                    // 修改密码
+                    this.passwordDialogVisible = true;
+                } else if (command === 'logout') {
+                    // 退出
+                    this.logoutClick();
+                }
+            },
+            // 退出
+            logoutClick () {
+                removeToken()
+                // 为了避免bug,重新实例化vue-router对象
+                location.reload()
             }
         }
     }

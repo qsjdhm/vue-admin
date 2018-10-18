@@ -17,7 +17,7 @@ import actions from './actions'
  */
 import User from './modules/User';
 import Permission from './modules/Permission';
-import Machine from './modules/Machine';
+import TabsView from './modules/TabsView';
 
 /**
  * 使用vuex
@@ -35,7 +35,7 @@ export default new Vuex.Store({
     modules: {
         User,
         Permission,
-        Machine
+        TabsView
     },
     strict: debug,
     middlewares: middlewares,

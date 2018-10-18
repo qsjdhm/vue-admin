@@ -1,44 +1,57 @@
 <template>
     <div class="tabs-view-pack">
-        <el-tabs v-model="editableTabsValue2" type="card" closable>
+        <el-tabs
+            v-model="activatedTab"
+            @tab-click="tabsViewClick"
+            @tab-remove="delTabsView" type="card" closable>
             <el-tab-pane
-                v-for="(item, index) in editableTabs2"
-                :key="item.name"
+                v-for="(item, index) in openedView"
+                :key="item.path"
                 :label="item.title"
-                :name="item.name"
+                :name="item.path"
             ></el-tab-pane>
         </el-tabs>
-
     </div>
 </template>
 
 <script>
+    import { mapState } from 'vuex'
+
     export default {
         name: 'TabsView',
         data () {
             return {
-                editableTabsValue2: '2',
-                editableTabs2: [{
-                    title: 'Tab 1',
-                    name: '1',
-                    content: 'Tab 1 content'
-                }, {
-                    title: 'Tab 1',
-                    name: '2',
-                    content: 'Tab 1 content'
-                }, {
-                    title: 'Tab 2',
-                    name: '3',
-                    content: 'Tab 2 content'
-                }, {
-                    title: 'Tab 2',
-                    name: '4',
-                    content: 'Tab 2 content'
-                }],
-                tabIndex: 3
+                activatedTab: ''
+            }
+        },
+        computed: {
+            ...mapState('TabsView', {
+                openedView: state => state.openedView
+            })
+        },
+        watch: {
+            $route () {
+                this.addTabsView()
             }
         },
         methods: {
+            // 添加一个tabs
+            addTabsView () {
+                this.$store.dispatch('TabsView/addTabsView', this.$route).then(() => {
+                    this.activatedTab = this.$route.path;
+                })
+            },
+            // 点击一个tabs
+            tabsViewClick (item) {
+                this.$router.push({ path: item.name })
+            },
+            // 删除一个tabs
+            delTabsView (item) {
+                console.info(item);
+            }
+        },
+        mounted () {
+            this.addTabsView()
         }
     }
 </script>
