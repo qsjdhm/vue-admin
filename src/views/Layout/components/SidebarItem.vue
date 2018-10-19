@@ -13,7 +13,7 @@
         <!-- 显示多级菜单 -->
         <el-submenu v-else ref="submenu" :index="resolvePath(item.path)">
             <template slot="title">
-                <svg-icon :icon-class="item.meta.icon" />
+                <svg-icon v-if="item.meta.icon !== undefined" :icon-class="item.meta.icon" />
                 <span slot="title">{{item.meta.title}}</span>
             </template>
 
@@ -29,7 +29,7 @@
 
                     <router-link :to="resolvePath(child.path)" :key="child.name">
                         <el-menu-item :index="resolvePath(child.path)">
-                            <svg-icon :icon-class="child.meta.icon" />
+                            <!--<svg-icon :icon-class="child.meta.icon" />-->
                             <span slot="title">{{child.meta.title}}</span>
                         </el-menu-item>
                     </router-link>
@@ -177,6 +177,9 @@
                 svg:before {
                     color: #bcbcbc;
                 }
+                span {
+                    margin-left: 20px;
+                }
             }
             /* 子级的子级菜单 */
             .el-submenu {
@@ -186,6 +189,9 @@
                 }
                 svg:before {
                     color: #bcbcbc;
+                }
+                span {
+                    margin-left: 20px;
                 }
                 .el-submenu__title {
                     height: 40px;
