@@ -1,6 +1,6 @@
 <template>
     <section class="app-main-pack">
-        <keep-alive :include="cachedView">
+        <keep-alive :include="cachedViews">
             <router-view :key="key"/>
         </keep-alive>
     </section>
@@ -17,7 +17,7 @@
         },
         computed: {
             ...mapState('TabsView', {
-                cachedView: state => state.cachedView
+                cachedViews: state => state.cachedViews
             }),
             key () {
                 return this.$route.path

@@ -1,10 +1,10 @@
 <template>
-    <div>AnalyzeNew</div>
+    <div>CutterNew</div>
 </template>
 
 <script>
     export default {
-        name: 'AnalyzeNew',
+        name: 'CutterNew',
         methods: {
         }
     }

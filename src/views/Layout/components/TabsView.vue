@@ -5,11 +5,12 @@
             @tab-click="tabsViewClick"
             @tab-remove="delTabsView" type="card" closable>
             <el-tab-pane
-                v-for="(item, index) in openedView"
+                v-for="(item, index) in openedViews"
                 :key="item.path"
                 :label="item.title"
-                :name="item.path"
-            ></el-tab-pane>
+                :name="item.path">
+                <span slot="label"><svg-icon :icon-class="item.meta.icon" /> {{item.title}}</span>
+            </el-tab-pane>
         </el-tabs>
     </div>
 </template>
@@ -26,7 +27,7 @@
         },
         computed: {
             ...mapState('TabsView', {
-                openedView: state => state.openedView
+                openedViews: state => state.openedViews
             })
         },
         watch: {
@@ -46,8 +47,37 @@
                 this.$router.push({ path: item.name })
             },
             // 删除一个tabs
-            delTabsView (item) {
-                console.info(item);
+            delTabsView (delViewPath) {
+                // 1. 主页不允许删除
+                if (delViewPath === '/dashboard/index') {
+                    this.$message.error('主页不允许删除');
+                    return false;
+                }
+                // 2. 如果当前tab被删除，需要选中上一个
+                if (this.activatedTab === delViewPath) {
+                    let index = 0;
+                    for (let tab of this.openedViews) {
+                        if (tab.path === delViewPath) {
+                            break;
+                        }
+                        index++;
+                    }
+                    // 如果从头删除就要选中后一个，如果从后删除就要选中上一个
+                    let checkedTabView = '';
+                    if (index > 0) {
+                        checkedTabView = this.openedViews[index - 1].path;
+                    } else {
+                        checkedTabView = this.openedViews[index + 1].path;
+                    }
+                    // 删除选中tab，并跳转路由
+                    this.$store.dispatch('TabsView/delTabsView', delViewPath).then(() => {
+                        this.activatedTab = checkedTabView;
+                        this.$router.push({ path: checkedTabView })
+                    })
+                } else {
+                    // 删除当前tab
+                    this.$store.dispatch('TabsView/delTabsView', delViewPath)
+                }
             }
         },
         mounted () {
@@ -82,8 +112,9 @@
                 background: #fff;
                 border: 1px solid #dcdcdc!important;
                 margin-right: 10px;
+                padding: 0 10px!important;
 
-                i {
+                svg {
                     margin-right: 5px;
                 }
             }

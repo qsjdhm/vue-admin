@@ -9,10 +9,10 @@ export default {
         });
     },
     // 删除tabs view
-    delTabsView ({dispatch, commit, state, rootState}, view) {
+    delTabsView ({dispatch, commit, state, rootState}, delViewPath) {
         return new Promise((resolve, reject) => {
-            commit('DEL_CACHED_VIEW', view);
-            commit('DEL_OPENED_VIEW', view);
+            // commit('DEL_CACHED_VIEW', view);
+            commit('DEL_OPENED_VIEW', delViewPath);
             resolve()
         });
     }

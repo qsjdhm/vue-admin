@@ -4,7 +4,8 @@
         <template v-if="hasOneShowingChild(item.children, item) && (!onlyOneChild.children || onlyOneChild.noShowingChildren)">
             <router-link :to="resolvePath(onlyOneChild.path)">
                 <el-menu-item :index="resolvePath(onlyOneChild.path)">
-                    <i class="el-icon-menu"></i><span slot="title">{{onlyOneChild.meta.title}}</span>
+                    <svg-icon :icon-class="onlyOneChild.meta.icon" />
+                    <span slot="title">{{onlyOneChild.meta.title}}</span>
                 </el-menu-item>
             </router-link>
         </template>
@@ -12,7 +13,8 @@
         <!-- 显示多级菜单 -->
         <el-submenu v-else ref="submenu" :index="resolvePath(item.path)">
             <template slot="title">
-                <i class="el-icon-menu"></i><span slot="title">{{item.meta.title}}</span>
+                <svg-icon :icon-class="item.meta.icon" />
+                <span slot="title">{{item.meta.title}}</span>
             </template>
 
             <!-- 一个递归，如果children还有多级子 -->
@@ -27,7 +29,8 @@
 
                     <router-link :to="resolvePath(child.path)" :key="child.name">
                         <el-menu-item :index="resolvePath(child.path)">
-                            <i class="el-icon-menu"></i><span slot="title">{{child.meta.title}}</span>
+                            <svg-icon :icon-class="child.meta.icon" />
+                            <span slot="title">{{child.meta.title}}</span>
                         </el-menu-item>
                     </router-link>
             </template>
@@ -107,23 +110,26 @@
         display: none;
     }
     .sidebar-item-pack {
+        /* 一级菜单 */
         .el-menu-item {
             height: 50px;
             line-height: 50px;
-            i:first-child {
+            svg {
                 width: 25px;
+                margin-right: 10px !important;
             }
-            i:before {
+            svg:before {
                 color: #bcbcbc !important;
             }
             &:hover {
                 background-color: #001529 !important;
                 color: #fff !important;
             }
+            [class^=el-icon-] {
+                margin-right: 10px;
+            }
         }
-        .el-menu-item [class^=el-icon-] {
-            margin-right: 10px;
-        }
+        /* 有子级的菜单 */
         .el-submenu {
             >div {
                 height: 50px !important;
@@ -136,16 +142,16 @@
                 height: 40px;
                 line-height: 40px;
                 &:hover {
-                    background-color: #000c17 !important;
+                    background-color: #001529 !important;
                     color: #fff !important;
                 }
-                i {
+                svg {
                     margin-right: 10px!important;
                 }
-                i:first-child {
+                svg:first-child {
                     width: 25px;
                 }
-                i:before {
+                svg:before {
                     color: #94949b !important;
                 }
                 .el-submenu__icon-arrow {
@@ -153,6 +159,7 @@
                     font-weight: bold;
                 }
             }
+            /* 子级的子菜单 */
             .el-menu {
                 background-color: #000c17 !important;
                 li {
@@ -167,8 +174,27 @@
                 height: 40px;
                 line-height: 40px;
                 /*padding-left: 60px !important;*/
-                i:before {
+                svg:before {
                     color: #bcbcbc;
+                }
+            }
+            /* 子级的子级菜单 */
+            .el-submenu {
+                >div {
+                    height: 40px !important;
+                    line-height: 40px !important;
+                }
+                svg:before {
+                    color: #bcbcbc;
+                }
+                .el-submenu__title {
+                    height: 40px;
+                    line-height: 40px;
+                    background-color: #000c17 !important;
+                    &:hover {
+                        background-color: #000c17 !important;
+                        color: #fff !important;
+                    }
                 }
             }
         }
@@ -179,7 +205,7 @@
                 color: #fff !important;
                 background-image: linear-gradient(-225deg, #108ee9 0%, #32a8fe 100%);
             }
-            i:before {
+            svg:before {
                 color: #fff !important;
             }
         }

@@ -2,7 +2,7 @@
     <div class="sidebar-pack" :style="{'width': sidebarClosed ? '64px' : '256px'}">
         <div class="logo-pack">
             <img :src="require(`../../../assets/images/Layout/logo.png`)">
-            <h1 :style="{'display': sidebarClosed ? 'none' : ''}">万腾设备管理系统</h1>
+            <h1 :style="{'width': sidebarClosed ? '0px' : 'auto'}">万腾设备管理系统</h1>
         </div>
         <div class="menu-pack">
             <el-menu
@@ -64,34 +64,48 @@
         top: 0;
         bottom: 0;
         z-index: 10;
+        overflow-y: hidden;
         background-color: #001529;
         -webkit-box-sizing: 2px 0 6px rgba(0,21,41,.35);
         -moz-box-sizing: 2px 0 6px rgba(0,21,41,.35);
         -ms-box-sizing: 2px 0 6px rgba(0,21,41,.35);
         -o-box-sizing: 2px 0 6px rgba(0,21,41,.35);
         box-shadow: 2px 0 6px rgba(0,21,41,.35);
+        transition: width 0.4s;
+        -moz-transition: width 0.4s;
+        -webkit-transition: width 0.4s;
+        -o-transition: width 0.4s;
 
         .logo-pack {
             @include rdc-box-sizing;
             position: relative;
             width: 100%;
             height: 64px;
-            line-height: 64px;
             padding-left: 17px;
             background: #002140;
+            display: -webkit-flex;
+            display: flex;
+            align-items: center;
+
             img {
                 display: inline-block;
-                vertical-align: middle;
                 height: 32px;
             }
             h1 {
                 color: #fff;
                 display: inline-block;
-                vertical-align: middle;
+                white-space: nowrap;
+                overflow: hidden;
+                -o-text-overflow: ellipsis;
+                text-overflow: ellipsis;
                 font-size: 20px;
                 margin: 0 0 0 12px;
                 font-family: Myriad Pro,Helvetica Neue,Arial,Helvetica,sans-serif;
                 font-weight: 600;
+                transition: width 0.4s;
+                -moz-transition: width 0.4s;
+                -webkit-transition: width 0.4s;
+                -o-transition: width 0.4s;
             }
         }
 

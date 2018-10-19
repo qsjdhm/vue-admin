@@ -57,6 +57,10 @@
             right: 0;
             top: 0;
             bottom: 0;
+            transition: left 0.4s;
+            -moz-transition: left 0.4s;
+            -webkit-transition: left 0.4s;
+            -o-transition: left 0.4s;
         }
     }
 </style>
