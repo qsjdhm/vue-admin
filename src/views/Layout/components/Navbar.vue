@@ -5,12 +5,13 @@
                 <svg-icon icon-class="fold" :class="{ 'inverse': sidebarClosed }"></svg-icon>
             </div>
             <div class="crumbs-pack">
-                <el-breadcrumb separator="/">
+                <!--<el-breadcrumb separator="/">
                     <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
                     <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
                     <el-breadcrumb-item>活动列表</el-breadcrumb-item>
                     <el-breadcrumb-item>活动详情</el-breadcrumb-item>
-                </el-breadcrumb>
+                </el-breadcrumb>-->
+                <breadcrumb class="breadcrumb-container"/>
             </div>
         </div>
         <div class="tools-pack">
@@ -59,12 +60,18 @@
 </template>
 
 <script>
+    // 引入路由面包屑组件
+    import Breadcrumb from '@/components/Breadcrumb'
+
     import { removeToken } from '@/utils/auth' // getToken from cookie
 
     import { mapState } from 'vuex'
 
     export default {
         name: 'Navbar',
+        components: {
+            Breadcrumb
+        },
         data () {
             return {
             }
@@ -130,6 +137,7 @@
                 }
             }
             .crumbs-pack {
+                padding-top: 10px;
                 .el-breadcrumb {
                     font-size: 16px;
                 }

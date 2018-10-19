@@ -4,7 +4,7 @@
         <template v-if="hasOneShowingChild(item.children, item) && (!onlyOneChild.children || onlyOneChild.noShowingChildren)">
             <router-link :to="resolvePath(onlyOneChild.path)">
                 <el-menu-item :index="resolvePath(onlyOneChild.path)">
-                    <svg-icon :icon-class="onlyOneChild.meta.icon" />
+                    <svg-icon :icon-class="onlyOneChild.meta.icon !== undefined ? onlyOneChild.meta.icon : 'list'" />
                     <span slot="title">{{onlyOneChild.meta.title}}</span>
                 </el-menu-item>
             </router-link>
@@ -13,7 +13,7 @@
         <!-- 显示多级菜单 -->
         <el-submenu v-else ref="submenu" :index="resolvePath(item.path)">
             <template slot="title">
-                <svg-icon v-if="item.meta.icon !== undefined" :icon-class="item.meta.icon" />
+                <svg-icon v-if="item.meta.icon !== undefined" :icon-class="item.meta.icon !== undefined ? item.meta.icon : 'list'" />
                 <span slot="title">{{item.meta.title}}</span>
             </template>
 

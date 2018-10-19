@@ -3,13 +3,17 @@
         <el-tabs
             v-model="activatedTab"
             @tab-click="tabsViewClick"
-            @tab-remove="delTabsView" type="card" closable>
+            @tab-remove="delTabsView"
+            type="card"
+            closable>
             <el-tab-pane
                 v-for="(item, index) in openedViews"
                 :key="item.path"
                 :label="item.title"
                 :name="item.path">
-                <span slot="label"><svg-icon :icon-class="item.meta.icon" /> {{item.title}}</span>
+                <span slot="label">
+                    <svg-icon :icon-class="item.meta.icon !== undefined ? item.meta.icon : 'list'" /> {{item.title}}
+                </span>
             </el-tab-pane>
         </el-tabs>
     </div>
