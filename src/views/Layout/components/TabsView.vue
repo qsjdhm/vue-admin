@@ -1,17 +1,20 @@
 <template>
     <div class="tabs-view-pack">
-        <el-tabs
-            v-model="activatedTab"
-            @tab-click="tabsViewClick"
-            @tab-remove="delTabsView" type="card" closable>
-            <el-tab-pane
-                v-for="(item, index) in openedViews"
-                :key="item.path"
-                :label="item.title"
-                :name="item.path">
-                <span slot="label"><svg-icon :icon-class="item.meta.icon" /> {{item.title}}</span>
-            </el-tab-pane>
-        </el-tabs>
+        <div style="width: 100%;height: 100%">
+            <el-tabs
+                v-model="activatedTab"
+                @tab-click="tabsViewClick"
+                @tab-remove="delTabsView" type="card" closable>
+                <el-tab-pane
+                    v-for="(item, index) in openedViews"
+                    :key="item.path"
+                    :label="item.title"
+                    :name="item.path">
+                    <span slot="label"><svg-icon :icon-class="item.meta.icon" /> {{item.title}}</span>
+                </el-tab-pane>
+            </el-tabs>
+        </div>
+
     </div>
 </template>
 
@@ -93,7 +96,7 @@
         left: 0;
         right: 0;
         height: 40px;
-        padding: 0 20px 0 0;
+        padding: 0 10px;
         background: #fff;
         -webkit-box-shadow: 0 1px 4px rgba(0,21,41,.08);
         box-shadow: 0 1px 4px rgba(0,21,41,.08);
@@ -101,43 +104,46 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        >div {
+            width: 100%;
+            height: 100%;
+            padding-top: 5px;
 
-        .el-tabs {
-            .el-tabs__header {
-                margin: 0 10px!important;
-            }
-            .el-tabs__item {
-                height: 30px;
-                line-height: 30px;
-                background: #fff;
-                border: 1px solid #dcdcdc!important;
-                margin-right: 10px;
-                padding: 0 10px!important;
+            .el-tabs {
+                .el-tabs__header {
+                    margin: 0 10px!important;
+                }
+                .el-tabs__item {
+                    height: 30px;
+                    line-height: 30px;
+                    background: #fff;
+                    border: 1px solid #dcdcdc!important;
+                    margin-right: 10px;
+                    padding: 0 10px!important;
 
-                svg {
-                    margin-right: 5px;
+                    svg {
+                        margin-right: 5px;
+                    }
+                }
+                .el-tabs__header {
+                    border-bottom: 0px solid #fff!important;
+                }
+                .el-tabs__nav {
+                    border: 0px solid #fff!important;
+                }
+
+                .el-tabs__nav-next, .el-tabs__nav-prev {
+                    line-height: 32px;
+                }
+
+                .is-active {
+                    color: #fff;
+                    background: #32a8fe ;
+                    border: 1px solid #fff!important;
+                    height: 31px;
+                    line-height: 31px;
                 }
             }
-            .el-tabs__header {
-                border-bottom: 0px solid #fff!important;
-            }
-            .el-tabs__nav {
-                border: 0px solid #fff!important;
-            }
-
-            .el-tabs__nav-next, .el-tabs__nav-prev {
-                line-height: 32px;
-            }
-
-            .is-active {
-                color: #fff;
-                background: #32a8fe ;
-                border: 1px solid #fff!important;
-                height: 31px;
-                line-height: 31px;
-            }
         }
-
-
     }
 </style>
