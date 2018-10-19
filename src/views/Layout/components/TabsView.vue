@@ -93,7 +93,7 @@
         left: 0;
         right: 0;
         height: 40px;
-        padding: 0 10px;
+        padding: 4px 10px 0 10px;
         background: #fff;
         -webkit-box-shadow: 0 1px 4px rgba(0,21,41,.08);
         box-shadow: 0 1px 4px rgba(0,21,41,.08);
