@@ -5,17 +5,12 @@
                 <svg-icon icon-class="fold" :class="{ 'inverse': sidebarClosed }"></svg-icon>
             </div>
             <div class="crumbs-pack">
-                <!--<el-breadcrumb separator="/">
-                    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                    <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
-                    <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-                    <el-breadcrumb-item>活动详情</el-breadcrumb-item>
-                </el-breadcrumb>-->
                 <breadcrumb class="breadcrumb-container"/>
             </div>
         </div>
         <div class="tools-pack">
-            <div class="warning-pack zoom">
+            <!--<div class="warning-pack zoom">-->
+            <div class="warning-pack">
                 <svg-icon icon-class="warning"></svg-icon>
             </div>
             <div class="question-pack">
@@ -26,7 +21,7 @@
             <div class="message-pack">
                 <svg-icon icon-class="message"></svg-icon>
             </div>
-            <div class="full-pack">
+            <div @click="fullClick" class="full-pack">
                 <el-tooltip class="item" effect="dark" content="全屏展示" placement="bottom">
                     <svg-icon icon-class="full"></svg-icon>
                 </el-tooltip>
@@ -60,12 +55,11 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex'
+    import screenfull from 'screenfull'
     // 引入路由面包屑组件
     import Breadcrumb from '@/components/Breadcrumb'
-
-    import { removeToken } from '@/utils/auth' // getToken from cookie
-
-    import { mapState } from 'vuex'
+    import { removeToken } from '@/utils/auth' // cookie使用类库
 
     export default {
         name: 'Navbar',
@@ -84,6 +78,17 @@
         methods: {
             toggleSideBar () {
                 this.$store.dispatch('toggleSideBar', !this.sidebarClosed)
+            },
+            fullClick () {
+                if (!screenfull.enabled) {
+                    this.$message({
+                        message: '你的浏览器不能使用此功能，请升级为最新版本',
+                        type: 'warning'
+                    })
+                    return false
+                }
+                screenfull.toggle()
+                this.toggleSideBar()
             },
             // 下拉项点击事件
             dropdownCommand (command) {
