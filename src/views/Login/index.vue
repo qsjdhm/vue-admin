@@ -82,7 +82,14 @@
             retrievePasswordClick () {}
         },
         mounted () {
-            // 初始化一下登录页的多语言
+            // 方案一：根据浏览器的语言环境
+            // var JsSrc = (navigator.language || navigator.browserLanguage).toLowerCase();
+            // if (JsSrc.indexOf('zh') !== -1) {
+            //     this.languageChange('zh')
+            // } else if (JsSrc.indexOf('en') !== -1) {
+            //     this.languageChange('en')
+            // }
+            // 方案二：根据用户自己选择的语言环境
             if (!Cookies.get('Admin-Language') || Cookies.get('Admin-Language') === 'zh') {
                 this.languageChange('zh')
             } else {

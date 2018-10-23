@@ -1,9 +1,9 @@
 import Mock from 'mockjs';
 
 const userMap = {
-    admin: {
-        roles: ['admin'],
-        token: 'admin',
+    root: {
+        roles: ['root'],
+        token: 'root',
         introduction: '我是超级管理员',
         avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
         name: 'Super Admin'
@@ -21,7 +21,7 @@ const userMap = {
 // 当跟后台联调真实数据时，直接注释掉对应接口的拦截就可以了
 Mock.mock(/\/auth\/login/, 'post', config => {
     const { username } = JSON.parse(config.body)
-    return userMap['admin']
+    return userMap[username]
 });
 Mock.mock(/\/login\/logout/, 'post', 'ok');
 Mock.mock(/\/user\/info\.*/, 'get', 'asdkbajshbd');
