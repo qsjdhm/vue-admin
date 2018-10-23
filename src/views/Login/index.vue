@@ -18,8 +18,8 @@
                     </div>
                     <div class="language-pack">
                         <el-radio-group @change="languageChange" v-model="language">
-                            <el-radio-button label="中文"></el-radio-button>
-                            <el-radio-button label="English"></el-radio-button>
+                            <el-radio-button label="zh">中文</el-radio-button>
+                            <el-radio-button label="en">English</el-radio-button>
                         </el-radio-group>
                     </div>
                 </div>
@@ -73,25 +73,20 @@
                     this.loading = false;
                 })
             },
-            languageChange (e) {
-                if (e === 'English') {
-                    Cookies.set('Admin-Language', 'en')
-                    this.$i18n.locale = 'en'
-                } else {
-                    Cookies.set('Admin-Language', 'zh')
-                    this.$i18n.locale = 'zh'
-                }
+            // 多语言切换事件
+            languageChange (val) {
+                this.$i18n.locale = val
+                this.language = val
+                Cookies.set('Admin-Language', val)
             },
             retrievePasswordClick () {}
         },
         mounted () {
-            console.info(Cookies.get('Admin-Language'));
+            // 初始化一下登录页的多语言
             if (!Cookies.get('Admin-Language') || Cookies.get('Admin-Language') === 'zh') {
-                this.language = '中文'
-                this.languageChange('中文');
+                this.languageChange('zh')
             } else {
-                this.language = 'English'
-                this.languageChange('English');
+                this.languageChange('en')
             }
         }
     }
