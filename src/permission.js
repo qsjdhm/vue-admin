@@ -3,7 +3,7 @@
  */
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css'// progress bar style
-import { getToken } from '@/utils/auth' // getToken from cookie
+import Cookies from 'js-cookie'
 
 import router from './router'
 import store from './store'
@@ -16,7 +16,7 @@ NProgress.configure({ showSpinner: false })// NProgress Configuration
 router.beforeEach((to, from, next) => {
     NProgress.start() // start progress bar
     // token没有用户信息，代表没有登录过
-    if (!getToken()) {
+    if (!Cookies.get('Admin-Token')) {
         // 在免登录白名单，直接进入
         if (whiteList.indexOf(to.path) !== -1) {
             next()

@@ -7,14 +7,20 @@
             <div class="login-pack">
                 <div class="logo-pack">
                     <img src="../../assets/images/Login/logo.png"/>
-                    <span>万腾设备管理系统</span>
+                    <span>{{ $t('login.title') }}</span>
                 </div>
                 <div class="content-pack">
                     <div class="email-pack">
-                        <el-input id="Login_Name_Input" v-model="username" @keyup.enter.native="loginClick" placeholder="请输入用户名"></el-input>
+                        <el-input v-model="username" @keyup.enter.native="loginClick" placeholder="请输入用户名"></el-input>
                     </div>
                     <div class="password-pack">
-                        <el-input id="Login_Password_Input" v-model="password" @keyup.enter.native="loginClick" type="password" placeholder="请输入密码"></el-input>
+                        <el-input v-model="password" @keyup.enter.native="loginClick" type="password" placeholder="请输入密码"></el-input>
+                    </div>
+                    <div class="language-pack">
+                        <el-radio-group @change="languageChange" v-model="language">
+                            <el-radio-button label="中文"></el-radio-button>
+                            <el-radio-button label="English"></el-radio-button>
+                        </el-radio-group>
                     </div>
                 </div>
                 <div class="button-pack">
@@ -34,8 +40,7 @@
 </template>
 
 <script>
-    import { removeToken } from '@/utils/auth' // getToken from cookie
-
+    import Cookies from 'js-cookie'
 
     export default {
         name: 'Login',
@@ -43,6 +48,7 @@
             return {
                 username: 'root',
                 password: '123456',
+                language: true,
                 loading: false,
                 redirect: null
             }
@@ -67,9 +73,25 @@
                     this.loading = false;
                 })
             },
-            retrievePasswordClick () {},
-            deleteToken () {
-                removeToken()
+            languageChange (e) {
+                if (e === 'English') {
+                    Cookies.set('Admin-Language', 'en')
+                    this.$i18n.locale = 'en'
+                } else {
+                    Cookies.set('Admin-Language', 'zh')
+                    this.$i18n.locale = 'zh'
+                }
+            },
+            retrievePasswordClick () {}
+        },
+        mounted () {
+            console.info(Cookies.get('Admin-Language'));
+            if (!Cookies.get('Admin-Language') || Cookies.get('Admin-Language') === 'zh') {
+                this.language = '中文'
+                this.languageChange('中文');
+            } else {
+                this.language = 'English'
+                this.languageChange('English');
             }
         }
     }

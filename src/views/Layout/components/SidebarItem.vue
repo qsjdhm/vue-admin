@@ -5,7 +5,7 @@
             <router-link :to="resolvePath(onlyOneChild.path)">
                 <el-menu-item :index="resolvePath(onlyOneChild.path)">
                     <svg-icon :icon-class="onlyOneChild.meta.icon !== undefined ? onlyOneChild.meta.icon : 'list'" />
-                    <span slot="title">{{onlyOneChild.meta.title}}</span>
+                    <span slot="title">{{generateTitle(onlyOneChild.meta.title)}}</span>
                 </el-menu-item>
             </router-link>
         </template>
@@ -14,7 +14,7 @@
         <el-submenu v-else ref="submenu" :index="resolvePath(item.path)">
             <template slot="title">
                 <svg-icon v-if="item.meta.icon !== undefined" :icon-class="item.meta.icon !== undefined ? item.meta.icon : 'list'" />
-                <span slot="title">{{item.meta.title}}</span>
+                <span slot="title">{{generateTitle(item.meta.title)}}</span>
             </template>
 
             <!-- 一个递归，如果children还有多级子 -->
@@ -30,7 +30,7 @@
                     <router-link :to="resolvePath(child.path)" :key="child.name">
                         <el-menu-item :index="resolvePath(child.path)">
                             <!--<svg-icon :icon-class="child.meta.icon" />-->
-                            <span slot="title">{{child.meta.title}}</span>
+                            <span slot="title">{{generateTitle(child.meta.title)}}</span>
                         </el-menu-item>
                     </router-link>
             </template>
@@ -41,6 +41,7 @@
 <script>
     import path from 'path'
     import { validateURL } from '@/utils/validate'
+    import { generateTitle } from '@/utils/i18n'
 
     export default {
         name: 'SidebarItem',
@@ -91,7 +92,8 @@
             },
             isExternalLink (routePath) {
                 return validateURL(routePath)
-            }
+            },
+            generateTitle
         }
     }
 </script>

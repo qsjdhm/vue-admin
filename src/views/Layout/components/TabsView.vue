@@ -12,7 +12,7 @@
                 :label="item.title"
                 :name="item.path">
                 <span slot="label">
-                    <svg-icon :icon-class="item.meta.icon !== undefined ? item.meta.icon : 'list'" /> {{item.title}}
+                    <svg-icon :icon-class="item.meta.icon !== undefined ? item.meta.icon : 'list'" /> {{generateTitle(item.title)}}
                 </span>
             </el-tab-pane>
         </el-tabs>
@@ -21,6 +21,8 @@
 
 <script>
     import { mapState } from 'vuex'
+    import { generateTitle } from '@/utils/i18n'
+
 
     export default {
         name: 'TabsView',
@@ -82,7 +84,8 @@
                     // 删除当前tab
                     this.$store.dispatch('TabsView/delTabsView', delViewPath)
                 }
-            }
+            },
+            generateTitle
         },
         mounted () {
             this.addTabsView()
@@ -97,7 +100,7 @@
         left: 0;
         right: 0;
         height: 40px;
-        padding: 4px 10px 0 10px;
+        padding: 4px 4px 0 4px;
         background: #fff;
         -webkit-box-shadow: 0 1px 4px rgba(0,21,41,.08);
         box-shadow: 0 1px 4px rgba(0,21,41,.08);

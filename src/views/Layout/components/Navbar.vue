@@ -26,6 +26,17 @@
                     <svg-icon icon-class="full"></svg-icon>
                 </el-tooltip>
             </div>
+            <div class="language-pack">
+                <el-dropdown @command="languageCommand">
+                    <span class="el-dropdown-link">
+                        {{language}}<i class="el-icon-arrow-down el-icon--right"></i>
+                    </span>
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item command="en" :disabled="enDisabled">English</el-dropdown-item>
+                        <el-dropdown-item command="zh" :disabled="znDisabled">中文</el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
+            </div>
             <div class="avatar-pack">
                 <el-dropdown @command="dropdownCommand">
                     <span class="el-dropdown-link">
@@ -39,17 +50,6 @@
                     </el-dropdown-menu>
                 </el-dropdown>
             </div>
-            <div class="language-pack">
-                <el-dropdown>
-                    <span class="el-dropdown-link">
-                        中文<i class="el-icon-arrow-down el-icon--right"></i>
-                    </span>
-                    <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item>English</el-dropdown-item>
-                        <el-dropdown-item :disabled="true">中文</el-dropdown-item>
-                    </el-dropdown-menu>
-                </el-dropdown>
-            </div>
         </div>
     </div>
 </template>
@@ -57,9 +57,9 @@
 <script>
     import { mapState } from 'vuex'
     import screenfull from 'screenfull'
+    import Cookies from 'js-cookie'
     // 引入路由面包屑组件
     import Breadcrumb from '@/components/Breadcrumb'
-    import { removeToken } from '@/utils/auth' // cookie使用类库
 
     export default {
         name: 'Navbar',
@@ -68,6 +68,9 @@
         },
         data () {
             return {
+                language: '',
+                enDisabled: false,
+                znDisabled: false
             }
         },
         computed: {
@@ -90,7 +93,23 @@
                 screenfull.toggle()
                 this.toggleSideBar()
             },
-            // 下拉项点击事件
+            // 多语言切换事件
+            languageCommand (command) {
+                if (command === 'en') {
+                    Cookies.set('Admin-Language', 'en')
+                    this.$i18n.locale = 'en'
+                    this.language = 'English'
+                    this.enDisabled = true;
+                    this.znDisabled = false;
+                } else {
+                    Cookies.set('Admin-Language', 'zh')
+                    this.$i18n.locale = 'zh'
+                    this.language = '中文'
+                    this.enDisabled = false;
+                    this.znDisabled = true;
+                }
+            },
+            // 个人配置事件
             dropdownCommand (command) {
                 if (command === 'password') {
                     // 修改密码
@@ -102,9 +121,21 @@
             },
             // 退出
             logoutClick () {
-                removeToken()
+                Cookies.remove('Admin-Token')
+                Cookies.remove('Admin-Language')
                 // 为了避免bug,重新实例化vue-router对象
                 location.reload()
+            }
+        },
+        mounted () {
+            if (Cookies.get('Admin-Language') === 'en') {
+                this.language = 'English'
+                this.enDisabled = true;
+                this.znDisabled = false;
+            } else {
+                this.language = '中文'
+                this.enDisabled = false;
+                this.znDisabled = true;
             }
         }
     }
@@ -153,21 +184,23 @@
             display: -webkit-flex;
             display: flex;
             align-items: center;
-            .warning-pack, .full-pack, .question-pack, .message-pack, .avatar-pack {
+            .warning-pack, .full-pack, .question-pack, .message-pack, .language-pack, .avatar-pack {
                 cursor: pointer;
                 margin-right: 25px;
                 font-size: 24px;
             }
+            .language-pack {
+                font-size: 18px;
+                margin-right: 0;
+                margin-right: 15px;
+            }
             .avatar-pack {
+                margin-right: 0;
                 font-size: 16px;
                 img {
                     width: 38px;
                     height: 38px;
                 }
-            }
-            .language-pack {
-                font-size: 18px;
-                margin-right: 0;
             }
         }
     }

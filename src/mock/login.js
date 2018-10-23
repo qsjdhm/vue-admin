@@ -21,7 +21,7 @@ const userMap = {
 // 当跟后台联调真实数据时，直接注释掉对应接口的拦截就可以了
 Mock.mock(/\/auth\/login/, 'post', config => {
     const { username } = JSON.parse(config.body)
-    return userMap[username]
+    return userMap['admin']
 });
 Mock.mock(/\/login\/logout/, 'post', 'ok');
 Mock.mock(/\/user\/info\.*/, 'get', 'asdkbajshbd');

@@ -2,8 +2,8 @@
     <el-breadcrumb class="app-breadcrumb" separator="/">
         <transition-group name="breadcrumb">
             <el-breadcrumb-item v-for="(item,index)  in levelList" :key="item.path" v-if='item.meta.title'>
-                <span v-if='index==levelList.length-1' class="no-redirect">{{item.meta.title}}</span>
-                <router-link v-else :to="{ path: item.path }">{{item.meta.title}}</router-link>
+                <span v-if='index==levelList.length-1' class="no-redirect">{{generateTitle(item.meta.title)}}</span>
+                <router-link v-else :to="{ path: item.path }">{{generateTitle(item.meta.title)}}</router-link>
             </el-breadcrumb-item>
         </transition-group>
     </el-breadcrumb>
@@ -11,6 +11,8 @@
 
 <script>
 import pathToRegexp from 'path-to-regexp'
+import { generateTitle } from '@/utils/i18n'
+
 
 export default {
     data () {
@@ -42,7 +44,8 @@ export default {
                 }].concat(matched);
             }
             this.levelList = matched
-        }
+        },
+        generateTitle
     },
     created () {
         this.getBreadcrumb()
@@ -55,7 +58,7 @@ export default {
         display: inline-block;
         font-size: 14px;
         line-height: 50px;
-        margin-left: 10px;
+        margin-left: 0;
         .no-redirect {
             color: #606266;
             cursor: text;

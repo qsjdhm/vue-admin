@@ -3,6 +3,7 @@
  * 基于axios的request配置（拦截器，统一处理所有http请求和响应）
  */
 
+import Cookies from 'js-cookie'
 import axios from 'axios'
 import _ from 'lodash'
 import router from '../router'
@@ -32,7 +33,7 @@ Axios.interceptors.request.use(
             req.data = JSON.parse(filterXSS(JSON.stringify(req.data)));
         }
         // 2. 设置token
-        let token = window.sessionStorage.getItem('ed');
+        let token = Cookies.get('Admin-Token');
         if (token !== undefined && token !== null && token !== '') {
             req.headers.Authorization = token;
         }
