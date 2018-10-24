@@ -33,6 +33,7 @@ module.exports = {
         'indent': ['error', 4],
         'no-trailing-spaces': 2,//一行结束后面不要有空格
         'arrow-spacing': 2,//=>的前/后括号
+        'no-useless-escape': 0,
 
         // allow debugger during development
         'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0

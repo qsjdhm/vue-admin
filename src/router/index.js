@@ -29,12 +29,12 @@ export const constantRouterMap = [
     {
         path: '/',
         name: 'Login',
-        component: Login,
+        component: () => import('@/views/Login'),
         hidden: true
     },
     {
         path: '/dashboard',
-        component: Layout,
+        component: () => import('@/views/Layout'),
         redirect: '/dashboard/index',
         children: [
             {
@@ -44,88 +44,81 @@ export const constantRouterMap = [
                 meta: {title: 'Dashboard', icon: 'lock'}
             }
         ]
+    },
+    {
+        path: '/component',
+        component: () => import('@/views/Layout'),
+        redirect: '/component/dragDialog',
+        meta: {title: 'Component', icon: 'star'},
+        alwaysShow: true,  // 一直显示根菜单
+        children: [
+            {
+                path: 'dragDialog',
+                component: () => import('@/views/Component/dragDialog'),
+                name: 'DragDialog',
+                meta: {title: 'DragDialog', icon: 'star'}
+            },
+            {
+                path: 'ueditor',
+                component: () => import('@/views/Component/ueditor'),
+                name: 'UEditor',
+                meta: {title: 'UEditor', icon: 'star'}
+            }
+        ]
     }
 ]
 
 // 业务级路由（后期可能在界面中动态配置）
 export const asyncRouterMap = [
-    // {
-    //     path: '/maintain',
-    //     component: Layout,
-    //     redirect: '/maintain/list',
-    //     meta: {title: 'Maintain', icon: 'user'},
-    //     // alwaysShow: true,  // 是否要一直显示根菜单
-    //     children: [
-    //         {
-    //             path: 'list',
-    //             component: () => import('@/views/Maintain/list'),
-    //             name: 'MaintainList',
-    //             meta: {title: 'MaintainList', icon: 'user'}
-    //         },
-    //         {
-    //             path: 'detail/:id(\\d+)',
-    //             component: () => import('@/views/Maintain/detail'),
-    //             name: 'MaintainDetail',
-    //             meta: { title: 'MaintainDetail', icon: 'user', noCache: true },
-    //             hidden: true  // 详情页不在菜单显示
-    //         }
-    //     ]
-    // },
-    // {
-    //     path: '/cutter',
-    //     component: Layout,
-    //     redirect: '/cutter/list',
-    //     meta: {title: 'Cutter', icon: 'star'},
-    //     children: [
-    //         {
-    //             path: 'new',
-    //             component: () => import('@/views/Cutter/new'),
-    //             name: 'CutterNew',
-    //             meta: {title: 'CutterNew', icon: 'star'}
-    //         },
-    //         {
-    //             path: 'list',
-    //             component: () => import('@/views/Cutter/list'),
-    //             name: 'CutterList',
-    //             meta: {title: 'CutterList', icon: 'star'}
-    //         },
-    //         {
-    //             path: 'detail/:id(\\d+)',
-    //             component: () => import('@/views/Cutter/detail'),
-    //             name: 'CutterDetail',
-    //             meta: { title: 'CutterDetail', icon: 'star' },
-    //             hidden: true  // 详情页不在菜单显示
-    //         }
-    //     ]
-    // },
-    // {
-    //     path: '/analyze',
-    //     component: Layout,
-    //     redirect: '/analyze/use',
-    //     meta: {title: 'Analyze', icon: 'tree'},
-    //     children: [
-    //         {
-    //             path: 'use',
-    //             component: () => import('@/views/Analyze/use'),
-    //             name: 'AnalyzeUse',
-    //             meta: {title: 'AnalyzeUse', icon: 'tree'}
-    //         },
-    //         {
-    //             path: 'data',
-    //             component: () => import('@/views/Analyze/dataList'),
-    //             name: 'AnalyzeData',
-    //             meta: {title: 'AnalyzeData', icon: 'tree'}
-    //         },
-    //         {
-    //             path: 'dataDetail/:id(\\d+)',
-    //             component: () => import('@/views/Analyze/dataDetail'),
-    //             name: 'AnalyzeDataDetail',
-    //             meta: {title: 'AnalyzeDataDetail', icon: 'tree'},
-    //             hidden: true
-    //         }
-    //     ]
-    // },
-    // nestedRouter
+    {
+        path: '/maintain',
+        component: () => import('@/views/Layout'),
+        redirect: '/maintain/list',
+        meta: {title: 'Maintain', icon: 'user'},
+        children: [
+            {
+                path: 'list',
+                component: () => import('@/views/Maintain/list'),
+                name: 'MaintainList',
+                meta: {title: 'MaintainList', icon: 'user'}
+            },
+            {
+                path: 'detail/:id(\\d+)',
+                component: () => import('@/views/Maintain/detail'),
+                name: 'MaintainDetail',
+                meta: { title: 'MaintainDetail', icon: 'user', noCache: true },
+                hidden: true  // 详情页不在菜单显示
+            }
+        ]
+    },
+    {
+        path: '/cutter',
+        component: () => import('@/views/Layout'),
+        redirect: '/cutter/list',
+        meta: {title: 'Cutter', icon: 'star'},
+        children: [
+            {
+                path: 'new',
+                component: () => import('@/views/Cutter/new'),
+                name: 'CutterNew',
+                meta: {title: 'CutterNew', icon: 'star'}
+            },
+            {
+                path: 'list',
+                component: () => import('@/views/Cutter/list'),
+                name: 'CutterList',
+                meta: {title: 'CutterList', icon: 'star'}
+            },
+            {
+                path: 'detail/:id(\\d+)',
+                component: () => import('@/views/Cutter/detail'),
+                name: 'CutterDetail',
+                meta: { title: 'CutterDetail', icon: 'star', noCache: true },
+                hidden: true  // 详情页不在菜单显示
+            }
+        ]
+    },
+    nestedRouter
 ]
 
 export default new Router({

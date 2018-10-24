@@ -1,4 +1,21 @@
 export default {
     Dashboard: 'Dashboard',
-    Maintain: 'Maintain'
+    Component: 'Component',
+    DragDialog: 'DragDialog',
+    UEditor: 'UEditor',
+    Maintain: 'Maintain',
+    MaintainList: 'MaintainList',
+    MaintainDetail: 'MaintainDetail',
+    Cutter: 'Cutter',
+    CutterNew: 'NewCutter',
+    CutterList: 'CutterList',
+    CutterDetail: 'CutterDetail',
+    Nested: 'Nested',
+    Menu1: 'Menu1',
+    'Menu1-1': 'Menu1-1',
+    'Menu1-2': 'Menu1-2',
+    'Menu1-2-1': 'Menu1-2-1',
+    'Menu1-2-2': 'Menu1-2-2',
+    'Menu1-3': 'Menu1-3',
+    Menu2: 'Menu2'
 }

@@ -1,7 +1,7 @@
 <template>
-    <div v-if="!item.hidden" class="sidebar-item-pack">
+    <div v-if="!item.hidden && item.children" class="sidebar-item-pack">
         <!-- 显示一层菜单 -->
-        <template v-if="hasOneShowingChild(item.children, item) && (!onlyOneChild.children || onlyOneChild.noShowingChildren)">
+        <template v-if="hasOneShowingChild(item.children, item) && (!onlyOneChild.children || onlyOneChild.noShowingChildren) && !item.alwaysShow">
             <router-link :to="resolvePath(onlyOneChild.path)">
                 <el-menu-item :index="resolvePath(onlyOneChild.path)">
                     <svg-icon :icon-class="onlyOneChild.meta.icon !== undefined ? onlyOneChild.meta.icon : 'list'" />
@@ -27,10 +27,10 @@
                     :basePath="resolvePath(child.path)"
                     class="nest-menu" />
 
-                    <router-link :to="resolvePath(child.path)" :key="child.name">
+                    <router-link v-else :to="resolvePath(child.path)" :key="child.name">
                         <el-menu-item :index="resolvePath(child.path)">
                             <!--<svg-icon :icon-class="child.meta.icon" />-->
-                            <span slot="title">{{generateTitle(child.meta.title)}}</span>
+                            <span v-if="child.meta"  slot="title">{{generateTitle(child.meta.title)}}</span>
                         </el-menu-item>
                     </router-link>
             </template>
@@ -193,6 +193,7 @@
                     color: #bcbcbc;
                 }
                 span {
+                    font-size: 12px !important;
                     margin-left: 20px;
                 }
                 .el-submenu__title {

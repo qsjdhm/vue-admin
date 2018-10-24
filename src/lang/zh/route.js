@@ -1,4 +1,21 @@
 export default {
     Dashboard: '仪表盘',
-    Maintain: '维修'
+    Component: '组件示例',
+    DragDialog: '拖拽弹框',
+    UEditor: '富文本',
+    Maintain: '维修管理',
+    MaintainList: '维修管理',
+    MaintainDetail: '维修详情',
+    Cutter: '刀具管理',
+    CutterNew: '新增刀具',
+    CutterList: '刀具列表',
+    CutterDetail: '刀具详情',
+    Nested: '嵌套路由',
+    Menu1: '菜单1',
+    'Menu1-1': '菜单1-1',
+    'Menu1-2': '菜单1-2',
+    'Menu1-2-1': '菜单1-2-1',
+    'Menu1-2-2': '菜单1-2-2',
+    'Menu1-3': '菜单1-3',
+    Menu2: '菜单2'
 }
